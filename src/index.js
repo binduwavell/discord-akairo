@@ -11,6 +11,10 @@ module.exports = {
     CommandUtil: require('./struct/commands/CommandUtil'),
     Flag: require('./struct/commands/Flag'),
 
+    // Reactions
+    Reaction: require('./struct/reactions/Reaction'),
+    ReactionHandler: require('./struct/reactions/ReactionHandler'),
+
     // Arguments
     Argument: require('./struct/commands/arguments/Argument'),
     TypeResolver: require('./struct/commands/arguments/TypeResolver'),

@@ -76,6 +76,18 @@ module.exports = {
         IN_PROMPT: 'inPrompt',
         ERROR: 'error'
     },
+    ReactionHandlerEvents: {
+        MESSAGE_BLOCKED: 'messageBlocked',
+        MESSAGE_INVALID: 'messageInvalid',
+        REACTION_BLOCKED: 'reactionBlocked',
+        REACTION_STARTED: 'reactionStarted',
+        REACTION_FINISHED: 'reactionFinished',
+        REACTION_CANCELLED: 'reactionCancelled',
+        REACTION_LOCKED: 'reactionLocked',
+        MISSING_PERMISSIONS: 'missingPermissions',
+        COOLDOWN: 'cooldown',
+        ERROR: 'error'
+    },
     BuiltInReasons: {
         CLIENT: 'client',
         BOT: 'bot',

@@ -1,10 +1,13 @@
-const { AkairoClient, CommandHandler, InhibitorHandler, ListenerHandler, SQLiteProvider } = require('../../src/index');
+const { AkairoClient, CommandHandler, ReactionHandler, InhibitorHandler, ListenerHandler, SQLiteProvider } = require('../../src/index');
 const sqlite = require('sqlite');
 const sqlite3 = require('sqlite3');
 
 class TestClient extends AkairoClient {
     constructor(ownerID) {
-        super({ ownerID });
+        super({
+            ownerID,
+            partials: ['MESSAGE', 'CHANNEL', 'REACTION']
+	});
 
         this.commandHandler = new CommandHandler(this, {
             directory: './test/commands/',
@@ -40,6 +43,10 @@ class TestClient extends AkairoClient {
             directory: './test/listeners/'
         });
 
+        this.reactionHandler = new ReactionHandler(this, {
+            directory: './test/reactions/'
+        });
+
         const db = sqlite.open({
             filename: './test/db.sqlite',
             driver: sqlite3.Database
@@ -65,6 +72,7 @@ class TestClient extends AkairoClient {
         this.commandHandler.loadAll();
         this.inhibitorHandler.loadAll();
         this.listenerHandler.loadAll();
+        this.reactionHandler.loadAll();
 
         const resolver = this.commandHandler.resolver;
         resolver.addType('1-10', (message, phrase) => {

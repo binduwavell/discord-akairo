@@ -2,7 +2,7 @@ declare module 'discord-akairo' {
     import {
         BufferResolvable, Client, ClientOptions, Collection,
         Message, MessageAttachment, MessageEmbed,
-        MessageAdditions, MessageEditOptions, MessageOptions, SplitOptions,
+        MessageAdditions, MessageEditOptions, MessageOptions, MessageReaction, SplitOptions,
         User, UserResolvable, GuildMember,
         Channel, Role, Emoji, Guild,
         PermissionResolvable, StringResolvable, Snowflake
@@ -259,6 +259,29 @@ declare module 'discord-akairo' {
         public on(event: 'inPrompt' | 'messageInvalid', listener: (message: Message) => any): this;
         public on(event: 'messageBlocked', listener: (message: Message, reason: string) => any): this;
         public on(event: 'missingPermissions', listener: (message: Message, command: Command, type: 'client' | 'user', missing?: any) => any): this;
+    }
+
+    export class Reaction extends AkairoModule {
+        public constructor(id: string, options?: AkairoModuleOptions);
+
+        public category: Category<string, Reaction>;
+        public description: string | any;
+        public handler: ReactionHandler;
+    }
+
+    export class ReactionHandler extends AkairoHandler {
+        public constructor(client: AkairoClient, options: AkairoHandlerOptions);
+
+        public categories: Collection<string, Category<string, Reaction>>;
+        public classToHandle: typeof Reaction;
+        public modules: Collection<string, Reaction>;
+
+        public deregister(reaction: Reaction): void;
+        public emitError(err: Error, messageReaction: MessageReaction, reactionType ReactionType, user:User, reaction?: Reaction): void;
+        public findCategory(name: string): Category<string, Reaction>;
+        public findReaction(name: string): Reaction;
+        public register(reaction: Reaction, filepath?: string): void;
+        public remove(id: string): Reaction;
     }
 
     export class CommandUtil {

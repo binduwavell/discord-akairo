@@ -32,13 +32,11 @@ class ReactionHandler extends AkairoHandler {
   setup() {
     this.client.once('ready', () => {
       this.client.on('messageReactionAdd', async (r, u) => {
-        console.log("REACTION ADDED");
         if (r.message.partial) await r.message.fetch();
         if (u.partial) await u.fetch();
         this.handle(r, 'added', u)
       })
       this.client.on('messageReactionRemove', async (r, u) => {
-        console.log("REACTION REMOVED");
         if (r.message.partial) await r.message.fetch();
         if (u.partial) await u.fetch();
         this.handle(r, 'removed', u)
@@ -49,7 +47,7 @@ class ReactionHandler extends AkairoHandler {
   /**
    * Handle a reaction interaction.
    * @param {MessageReaction} messageReaction = Message that triggered the reaction.
-   * @param {string} reactionType - What type of action was perfromed (added or removed).
+   * @param {ReactionType} reactionType - What type of action was perfromed (added or removed).
    * @param {User} user - User that triggered the reaction.
    * @returns {void}
    */
@@ -70,7 +68,7 @@ class ReactionHandler extends AkairoHandler {
    * Handles errors from the handling.
    * @param {Error} err - The error.
    * @param {MessageReaction} messageReaction - Message that triggered the reaction.
-   * @param {string} reactionType - What type of action was performed (added or removed).
+   * @param {ReactionType} reactionType - What type of action was performed (added or removed).
    * @param {User} user - User that triggered the reaction.
    * @param {Reaction} [reaction] - Reaction that errored.
    * @returns {void}

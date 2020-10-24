@@ -8,8 +8,8 @@ class Reaction extends AkairoModule {
   /**
    * Executes the response handler.
    * @abstract
-   * @param {ReactionMessage} reaction - Message that triggered the reaction.
-   * @param {string} reactionType - What type of action was perfromed (added or removed).
+   * @param {MessageReaction} reaction - Message that triggered the reaction.
+   * @param {ReactionType} reactionType - What type of action was perfromed (added or removed).
    * @param {User} user - User that triggered the reaction.
    * @param {any} args - Evaluated arguments.
    * @returns {any}

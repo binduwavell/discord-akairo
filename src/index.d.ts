@@ -261,8 +261,12 @@ declare module 'discord-akairo' {
         public on(event: 'missingPermissions', listener: (message: Message, command: Command, type: 'client' | 'user', missing?: any) => any): this;
     }
 
+    export type ReactionType = 'added' | 'removed';
+
     export class Reaction extends AkairoModule {
         public constructor(id: string, options?: AkairoModuleOptions);
+
+        public exec(reaction: MessageReaction, reactionType: ReactionType, user: User, args: any): any;
 
         public category: Category<string, Reaction>;
         public description: string | any;
@@ -276,8 +280,9 @@ declare module 'discord-akairo' {
         public classToHandle: typeof Reaction;
         public modules: Collection<string, Reaction>;
 
+        public handle(messageReaction: MessageReaction, reactionType: ReactionType, user: User): void;
         public deregister(reaction: Reaction): void;
-        public emitError(err: Error, messageReaction: MessageReaction, reactionType ReactionType, user:User, reaction?: Reaction): void;
+        public emitError(err: Error, messageReaction: MessageReaction, reactionType: ReactionType, user:User, reaction?: Reaction): void;
         public findCategory(name: string): Category<string, Reaction>;
         public findReaction(name: string): Reaction;
         public register(reaction: Reaction, filepath?: string): void;

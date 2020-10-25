@@ -4,10 +4,7 @@ const sqlite3 = require('sqlite3');
 
 class TestClient extends AkairoClient {
     constructor(ownerID) {
-        super({
-            ownerID: ownerID,
-            partials: ['MESSAGE', 'CHANNEL', 'REACTION']
-        });
+        super({ ownerID });
 
         this.commandHandler = new CommandHandler(this, {
             directory: './test/commands/',
